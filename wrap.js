@@ -2,10 +2,11 @@ document.addEventListener("DOMContentLoaded", () => {
     const toggle = document.getElementById("wrapToggle");
     const links = document.querySelector(".links-list");
     const hint = document.querySelector(".links-hint");
+    const box = document.querySelector(".links-box");
 
     toggle.textContent = "Ссылки ⯈";
 
-    toggle.addEventListener("click", () => {
+    function switchLinks() {
         const opened = !links.classList.contains("collapsed");
 
         if (opened) {
@@ -17,5 +18,16 @@ document.addEventListener("DOMContentLoaded", () => {
             toggle.textContent = "Ссылки ⯆";
             hint.textContent = "нажмите чтобы закрыть";
         }
+    }
+
+    toggle.addEventListener("click", (e) => {
+        e.stopPropagation();
+        switchLinks();
+    });
+
+    box.addEventListener("click", (e) => {
+        if (e.target.closest(".link-item")) return;
+
+        switchLinks();
     });
 });
