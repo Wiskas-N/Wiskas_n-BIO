@@ -8,6 +8,20 @@ document.addEventListener("DOMContentLoaded", () => {
     baseSound.volume = 0.25;
 
     let isOpen = false;
+    let unlocked = false;
+
+    function unlockAudio() {
+        if (unlocked) return;
+
+        baseSound.play().then(() => {
+            baseSound.pause();
+            baseSound.currentTime = 0;
+            unlocked = true;
+            console.log("Audio unlocked");
+        }).catch(() => {});
+    }
+
+    document.addEventListener("click", unlockAudio, { once: true });
 
     function restartAnimations() {
         links.forEach(el => el.style.animation = "none");
@@ -16,6 +30,8 @@ document.addEventListener("DOMContentLoaded", () => {
     }
 
     function playSound() {
+        if (!unlocked) return;
+
         const s = baseSound.cloneNode();
         s.volume = baseSound.volume;
         s.currentTime = 0;
