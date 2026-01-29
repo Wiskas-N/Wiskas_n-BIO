@@ -390,8 +390,7 @@ body {
 }
 
 .links-list {
-    --count: 10;
-    
+    --count: 5;
 }
 
 .link-item {
@@ -404,7 +403,7 @@ body {
     animation-timing-function: linear;
     animation-fill-mode: forwards;
 
-    animation-delay: calc(var(--i) * 0.3s);
+    animation-delay: calc((var(--count) - var(--i) - 1) * 0.3s);
 
     margin-top: -4px;
 }
