@@ -1,49 +1,33 @@
 document.addEventListener("DOMContentLoaded", () => {
-    const linksList = document.querySelector(".links-list");
-    const links = document.querySelectorAll(".link-item");
+    const toggle = document.getElementById("wrapToggle");
+    const links = document.querySelector(".links-list");
+    const hint = document.querySelector(".links-hint");
+    const box = document.querySelector(".links-box");
 
-    if (!linksList || !links.length) return;
+    toggle.textContent = "Ссылки ⯈";
 
-    const baseSound = new Audio("link_sound.mp3");
-    baseSound.volume = 0.25;
+    function switchLinks() {
+        const opened = !links.classList.contains("collapsed");
 
-    let isOpen = false;
-
-    function restartAnimations() {
-        links.forEach(el => el.style.animation = "none");
-        void linksList.offsetHeight;
-        links.forEach(el => el.style.animation = "");
+        if (opened) {
+            links.classList.add("collapsed");
+            toggle.textContent = "Ссылки ⯈";
+            hint.textContent = "нажмите чтобы открыть";
+        } else {
+            links.classList.remove("collapsed");
+            toggle.textContent = "Ссылки ⯆";
+            hint.textContent = "нажмите чтобы закрыть";
+        }
     }
 
-    function playSound() {
-        const s = baseSound.cloneNode();
-        s.volume = baseSound.volume;
-        s.currentTime = 0;
-        s.play().catch(() => {});
-    }
-
-    links.forEach(link => {
-        link.addEventListener("animationend", (e) => {
-            if (e.animationName !== "boxFallIn") return;
-            playSound();
-        });
+    toggle.addEventListener("click", (e) => {
+        e.stopPropagation();
+        switchLinks();
     });
 
-    const observer = new MutationObserver(() => {
-        const opened = !linksList.classList.contains("collapsed");
+    box.addEventListener("click", (e) => {
+        if (e.target.closest(".link-item")) return;
 
-        if (opened && !isOpen) {
-            isOpen = true;
-            restartAnimations();
-        }
-
-        if (!opened && isOpen) {
-            isOpen = false;
-        }
-    });
-
-    observer.observe(linksList, {
-        attributes: true,
-        attributeFilter: ["class"]
+        switchLinks();
     });
 });
