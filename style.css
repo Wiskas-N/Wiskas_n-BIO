@@ -379,15 +379,19 @@ body {
 }
 
 @keyframes boxFallOut {
-    from {
+    0% {
         opacity: 1;
-        transform: translateY(0);
+        transform: translateY(0) scale(1);
     }
-    to {
+    40% {
+        transform: translateY(-15px) scale(1.05);
+    }
+    100% {
         opacity: 0;
-        transform: translateY(160px);
+        transform: translateY(120px) scale(0.6);
     }
 }
+
 
 .links-list {
     --count: 5;
@@ -402,7 +406,7 @@ body {
     animation-duration: 0.35s;
     animation-timing-function: linear;
     animation-fill-mode: forwards;
-
+    animation-timing-function: cubic-bezier(.22,.61,.36,1);
     animation-delay: calc((var(--count) - var(--i) - 1) * 0.3s);
 
     margin-top: -4px;
