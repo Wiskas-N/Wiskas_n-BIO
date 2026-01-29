@@ -1,26 +1,44 @@
 document.addEventListener("DOMContentLoaded", () => {
     const linksList = document.querySelector(".links-list");
-    const firstLink = document.querySelector(".link-item");
+    const links = document.querySelectorAll(".link-item");
 
-    if (!linksList || !firstLink) return;
+    if (!linksList || !links.length) return;
 
-    const sound = new Audio("link_sound.mp3");
-    sound.volume = 0.2;
+    const baseSound = new Audio("link_sound.mp3");
+    baseSound.volume = 0.25;
 
-    let played = false;
+    let isOpen = false;
+
+    function restartAnimations() {
+        links.forEach(el => el.style.animation = "none");
+        void linksList.offsetHeight;
+        links.forEach(el => el.style.animation = "");
+    }
+
+    function playSound() {
+        const s = baseSound.cloneNode();
+        s.volume = baseSound.volume;
+        s.currentTime = 0;
+        s.play().catch(() => {});
+    }
+
+    links.forEach(link => {
+        link.addEventListener("animationend", (e) => {
+            if (e.animationName !== "boxFallIn") return;
+            playSound();
+        });
+    });
 
     const observer = new MutationObserver(() => {
-        if (!linksList.classList.contains("collapsed") && !played) {
-            played = true;
+        const opened = !linksList.classList.contains("collapsed");
 
-            setTimeout(() => {
-                sound.currentTime = 0;
-                sound.play().catch(() => {});
-            }, 50);
+        if (opened && !isOpen) {
+            isOpen = true;
+            restartAnimations();
         }
 
-        if (linksList.classList.contains("collapsed")) {
-            played = false;
+        if (!opened && isOpen) {
+            isOpen = false;
         }
     });
 
