@@ -20,6 +20,14 @@ document.addEventListener("DOMContentLoaded", () => {
         }
     }
 
+    function openWrap() {
+        links.classList.remove("collapsed");
+        toggle.textContent = "Ссылки ⯆";
+        hint.textContent = "нажмите чтобы закрыть";
+    }
+
+    window.openWrap = openWrap;
+
     toggle.addEventListener("click", (e) => {
         e.stopPropagation();
         switchLinks();
@@ -27,7 +35,6 @@ document.addEventListener("DOMContentLoaded", () => {
 
     box.addEventListener("click", (e) => {
         if (e.target.closest(".link-item")) return;
-
         switchLinks();
     });
 });
