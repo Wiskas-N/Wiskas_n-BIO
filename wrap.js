@@ -4,10 +4,24 @@ document.addEventListener("DOMContentLoaded", () => {
     const hint = document.querySelector(".links-hint");
     const box = document.querySelector(".links-box");
 
+    let isAnimating = false;
+    const ANIMATION_TIME = 1000;
+
     toggle.textContent = "Ссылки ⯈";
 
+    function lockAnimation() {
+        isAnimating = true;
+        setTimeout(() => {
+            isAnimating = false;
+        }, ANIMATION_TIME);
+    }
+
     function switchLinks() {
+        if (isAnimating) return;
+
         const opened = !links.classList.contains("collapsed");
+
+        lockAnimation();
 
         if (opened) {
             links.classList.add("collapsed");
@@ -21,6 +35,10 @@ document.addEventListener("DOMContentLoaded", () => {
     }
 
     function openWrap() {
+        if (isAnimating) return;
+
+        lockAnimation();
+
         links.classList.remove("collapsed");
         toggle.textContent = "Ссылки ⯆";
         hint.textContent = "нажмите чтобы закрыть";
