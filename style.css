@@ -99,7 +99,7 @@ font-size: 32px;
 font-weight: 800;
 margin-bottom: 16px;
 text-align: center;
-background: linear-gradient(90deg, #5f2cff, #b026ff, #ff2f2f);
+background: linear-gradient(90deg, #799190, #999999, #b8b8b8);
 color: transparent;
 background-clip: text;
 text-shadow: 0 0 12px rgba(157, 78, 221, 0.35);
@@ -263,7 +263,7 @@ font-size: 32px;
 font-weight: 800;
 margin-bottom: 10px;
 color: #c7b8ff;
-background: linear-gradient(90deg, #5f2cff, #b026ff, #ff2f2f);
+background: linear-gradient(90deg, #799190, #999999, #b8b8b8);
 color: transparent;
 background-clip: text;
 }
@@ -449,3 +449,4 @@ animation-delay: calc((var(--count) - var(--i) - 1) * 0.08s);
 .link-item:nth-child(8)  { --i: 7; }
 .link-item:nth-child(9)  { --i: 8; }
 .link-item:nth-child(10) { --i: 9; }
+
