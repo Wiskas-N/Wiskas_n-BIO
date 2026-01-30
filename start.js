@@ -25,6 +25,10 @@ document.addEventListener('DOMContentLoaded', () => {
 
         startScreen.classList.add('hidden');
 
+        if (window.openWrap) {
+            window.openWrap();
+        }
+
         setTimeout(() => {
             startScreen.remove();
         }, 700);
