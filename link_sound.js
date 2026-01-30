@@ -7,7 +7,7 @@ document.addEventListener("DOMContentLoaded", () => {
     const soundSrc = "link_sound.mp3";
     const volume = 0.2;
 
-    const interval = 0.3;
+    const interval = 0.500;
 
     let isOpen = false;
     let timeouts = [];
@@ -33,7 +33,7 @@ document.addEventListener("DOMContentLoaded", () => {
         clearTimers();
 
         links.forEach((link, index) => {
-            const delay = index * interval * 300;
+            const delay = index * interval * 800;
 
             const t = setTimeout(() => {
                 const s = new Audio(soundSrc);
